@@ -1,27 +1,27 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
   <header>
-
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
-        <RouterLink to="/heroes">Heroes</RouterLink>
-        <RouterLink to="/hero">Hero</RouterLink>
+        <ul>
+          <li>
+            <RouterLink to="/">Heroes</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/login">Login</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/register">Register</RouterLink>
+          </li>
+        </ul>
       </nav>
-    </div>
   </header>
-
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
