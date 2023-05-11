@@ -23,7 +23,7 @@ export default {
         }
     },
     async mounted() {
-        this.heroes = await fetch("url")
+        this.heroes = await fetch("http://heroes.laravel/heroes")
     }
 }
 </script>
