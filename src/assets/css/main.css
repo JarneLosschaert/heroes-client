@@ -1,0 +1,30 @@
+@import './base.css';
+@import './reset.css';
+
+
+body{
+  font-family: Roboto, Geneva, Tahoma, sans-serif;
+  margin: 0 5rem;
+}
+
+/* loader */
+
+.loader {
+  border: 16px solid var(--color-text);
+  border-radius: 50%;
+  border-top: 16px solid var(--color-text-accent);
+  width: 3rem;
+  height: 3rem;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

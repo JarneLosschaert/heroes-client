@@ -1,0 +1,35 @@
+:root {
+  --darkpurple: #1C1833;
+  --white: hsl(0, 0%, 100%);
+  --red: #E60F0F;
+}
+
+:root {
+  --color-background: var(--darkpurple);
+
+  --color-border: var(--white);
+  --color-border-hover: var(--red);
+
+  --color-button: var(--red);
+
+  --color-heading: var(--red);
+  --color-text: var(--white);
+  --color-text-accent: var(--red);
+  
+  --color-titles: var(--red);
+}
+
+:root, a {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.accent {
+  color: var(--color-text-accent);
+}
+
