@@ -19,9 +19,14 @@ const router = createRouter({
       component: () => import('../views/RegisterView.vue')
     },
     {
-      path: '/heroes/:id',
+      path: '/hero/:id',
       name: 'hero',
-      component: () => import('../views/HeroView.vue')
+      component: () => import('../views/HeroDetailView.vue')
+    },
+    {
+      path: '/create-hero',
+      name: 'create-hero',
+      component: () => import('../views/CreateHeroView.vue')
     }
    ,
   ]

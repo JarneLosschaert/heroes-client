@@ -1,9 +1,8 @@
-const url = "http://heroes.laravel/heroes";
+const url = "http://heroes.laravel/api/heroes";
 
 export default class HeroService {
     constructor() {
         this.page = 1;
-        this.perPage = 15;
     }
 
     setPage(page) {
@@ -11,18 +10,20 @@ export default class HeroService {
         return this;
     }
 
-    setPerPage(perPage) {
-        this.perPage = perPage;
-        return this;
+    getLanguage() {
+        let language = localStorage.getItem("language");
+        if (language != "en" && language != "nl") {
+            language = "en";
+        }
+        return language;
     }
 
     async all() {
         let fullUrl = url;
-        fullUrl //+= "?perPage=" + this.perPage;
-        //fullUrl += "&page=" + this.page;
+        fullUrl += "/list";
+        fullUrl += "?page=" + this.page;
+        fullUrl += "&language=" + this.getLanguage();
 
-
-        console.log(fullUrl);
         const response = await fetch(fullUrl);
         const data = await response.json();
 

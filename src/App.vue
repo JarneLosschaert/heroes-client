@@ -1,89 +1,132 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
+  <body>
+    <header>
       <nav>
         <ul>
           <li>
-            <RouterLink to="/">Heroes</RouterLink>
+            <RouterLink id="logo" to="/">
+              <img src="./assets/images/logo.png" alt="logo" />
+            </RouterLink>
           </li>
-          <li>
-            <RouterLink to="/login">Login</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/register">Register</RouterLink>
-          </li>
+          <ul>
+            <li>
+              <RouterLink
+                v-bind:class="{ accent: isCurrentRoute('/') }"
+                to="/"
+              >
+                Your Heroes
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                v-bind:class="{ accent: isCurrentRoute('/create-hero') }"
+                to="/create-hero"
+              >
+                Create Hero
+              </RouterLink>
+            </li>
+            <li>
+              <div id="language" @click="toggleLanguage">
+                {{ getLanguage() }}
+              </div>
+            </li>
+            <li>
+              <RouterLink id="profile" to="/login">
+                <img src="./assets/images/profile.png" alt="profile" />
+              </RouterLink>
+            </li>
+          </ul>
         </ul>
       </nav>
-  </header>
-  <main>
-    <RouterView />
-  </main>
+    </header>
+    <main>
+      <RouterView :key="viewKey"/>
+    </main>
+  </body>
 </template>
 
+<script>
+
+export default {
+  data() {
+    return {
+      viewKey: 0,
+      selectedLanguage: localStorage.getItem("language") || "en",
+    };
+  },
+  mounted() {
+    if (localStorage.getItem("language") === null) {
+      localStorage.setItem("language", "en");
+    }
+  },
+  methods: {
+    isCurrentRoute(route) {
+      return this.$route.path === route;
+    },
+    toggleLanguage() {
+      if (this.selectedLanguage === "en") {
+        this.selectedLanguage = "nl";
+        localStorage.setItem("language", "nl");
+      } else {
+        this.selectedLanguage = "en";
+        localStorage.setItem("language", "en");
+      }
+      this.viewKey++;
+    },
+    getLanguage() {
+      if (this.selectedLanguage === "nl") {
+        return "Nederlands";
+      } else {
+        return "English"
+      }
+    },
+  },
+};
+</script>
+
 <style scoped>
+.accent {
+  color: var(--color-text-accent);
+}
+
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  height: 5rem;
+  margin: 3rem 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+nav ul ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+#logo img {
+  height: 5rem;
+  margin: auto;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+#profile img {
+  height: 3rem;
+  margin: auto;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+#language {
+  cursor: pointer;
+  padding: 0.4rem 0.5rem;
+  background-color: var(--color-button);
+  border-radius: 0.25rem;
 }
 </style>

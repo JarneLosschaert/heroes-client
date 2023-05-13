@@ -1,79 +1,39 @@
 <template>
-<div>
-    <h1>Heroes</h1>
-    <div class="wrapper">
-        <div v-for="hero in heroes.data" :key="hero.id">
-            <router-link :to="{ name: 'hero', params: { id: hero.id } }">
-                <img :src="hero.image" :alt="hero.name" />
-                <h2>{{ hero.name }}</h2>
-            </router-link>
-        </div>
-    </div>
-</div>
+    <heroes :page="page" :setPages="setPages"></heroes>
+    <paginate :page="page" :pages="pages" :setPage="setPage"></paginate>
 </template>
 
 <script>
-import HeroService from '../modules/heroes/services/HeroService'
+import Heroes from '../modules/heroes/components/Heroes.vue'
+import Paginate from '../modules/heroes/components/Paginate.vue'
 
 export default {
-    name: 'Heroes',
+    name: 'HeroesView',
     components: {
-        // Hero
-    },
-    props: {
-        page: {
-            default: 1
-        },
-        perPage: {
-            default: 15
-        }
+        Heroes,
+        Paginate
     },
     data() {
         return {
-            "service": new HeroService(),
-            heroes: [],
-            loaded: false
+            page: 1,
+            pages: 2
         }
-    },
-    watch: {
-        perPage: {
-            handler: async function () {
-                if (!this.loaded)
-                    return;
-                await this.loadHeroes();
-            },
-            immediate: true
-        },
-        page: {
-            handler: async function () {
-                if (!this.loaded)
-                    return;
-                await this.loadHeroes();
-            },
-            immediate: true
-        }
-    },
-    computed: {
-        heroes() {
-            return{
-                heroes: []
-            }
-        }
-    },
-    async mounted() {
-        await this.loadHeroes();
-        this.loaded = true;
     },
     methods: {
-        async loadHeroes() {
-            console.log("load heroes")
-            this.heroes = await this.service
-                .setPage(this.page)
-                .setPerPage(this.perPage)
-                .all();
-            console.log(this.heroes);
+        setPage(page){
+            page = parseInt(page);
+            if (page < 1) {
+                page = 1;
+            }
+            if (page > this.pages) {
+                page = this.pages;
+            }
+            this.page = page;
         },
-    },
+        setPages(pages){
+            this.pages = pages;
+        }
+    }
 }
 </script>
 
