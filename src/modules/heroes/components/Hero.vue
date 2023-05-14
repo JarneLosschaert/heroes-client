@@ -16,6 +16,11 @@ export default {
             required: true
         }
     },
+    computed: {
+        heroImage() {
+            return require('../../../assets/images/heroes/' + this.hero.image);
+        }
+    },
     methods: {
         routeHero() {
             this.$router.push({path: '/hero/' + this.hero.id});
