@@ -1,8 +1,8 @@
 <template>
     <div id="paginate">
-        <img @click="previousPage" src="../../../assets/images/arrow-left.png" alt="arrow left">
+        <img @click="previousPage" class="arrow" src="../../../assets/images/arrow-left.png" alt="arrow left">
         <p>Page {{ page }} of the {{ pages }}</p>
-        <img @click="nextPage" src="../../../assets/images/arrow-right.png" alt="arrow right">
+        <img @click="nextPage" class="arrow" src="../../../assets/images/arrow-right.png" alt="arrow right">
     </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
     font-weight: bold;
 }
 
-img {
+.arrow {
     height: 1.5rem;
     cursor: pointer;
 }

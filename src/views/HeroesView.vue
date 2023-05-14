@@ -38,9 +38,8 @@ export default {
 </script>
 
 <style>
-.wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+body {
+    margin-bottom: 7rem;
 }
+
 </style>

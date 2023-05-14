@@ -2,21 +2,26 @@
   --darkpurple: #1C1833;
   --white: hsl(0, 0%, 100%);
   --red: #E60F0F;
+  --darkred: #A60C0C;
+  --blue: #03578C;
 }
 
 :root {
   --color-background: var(--darkpurple);
+  --color-primary: var(--red);
+  --color-onprimary: var(--white);
+  --color-primary-variant: var(--darkred);
+  --color-secondary: var(--blue);
 
-  --color-border: var(--white);
-  --color-border-hover: var(--red);
+  --color-border: var(--color-onprimary);
+  --color-border-hover: var(---color-primary);
 
-  --color-button: var(--red);
+  --color-button: var(--color-primary);
 
-  --color-heading: var(--red);
-  --color-text: var(--white);
-  --color-text-accent: var(--red);
-  
-  --color-titles: var(--red);
+  --color-heading: var(--color-primary);
+  --color-text: var(--color-onprimary);
+  --color-text-accent: var(--color-primary);
+  --color-titles: var(--color-primary);
 }
 
 :root, a {

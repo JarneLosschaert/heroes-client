@@ -59,7 +59,7 @@ export default {
       this.heroes = this.heroes;
       this.setPages(this.heroes.last_page);
       this.loaded = true;
-    },
+    }
   },
 };
 </script>
@@ -68,6 +68,7 @@ export default {
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 2rem;
 }
 </style>

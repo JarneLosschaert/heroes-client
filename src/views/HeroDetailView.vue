@@ -26,7 +26,8 @@ export default {
   methods: {
     async loadHero() {
       this.hero = await this.service.find(this.heroId);
-      this.hero = this.hero.data.data;
+      this.hero = this.hero.data;
+      console.log(this.hero);
     },
   },
   computed: {
