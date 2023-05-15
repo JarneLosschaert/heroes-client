@@ -1,32 +1,18 @@
 <template>
-  <form @submit.prevent="login">
-    <input placeholder="email" v-model="email" />
-    <input placeholder="password" v-model="password" />
-    <button>Login</button>
-  </form>
-  <RouterLink to="/register"><button>Register</button></RouterLink>
+  <h2>Login</h2>
+  <LoginForm></LoginForm>
 </template>
 
 <script>
+import LoginForm from '../modules/users/components/LoginForm.vue';
+
 export default {
   name: "LoginView",
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-  methods: {
-    login() {
-      this.$store.dispatch("login", {
-        username: this.username,
-        password: this.password,
-      });
-    },
+  components: {
+    LoginForm
   },
 };
 </script>
 
 <style>
-
 </style>
