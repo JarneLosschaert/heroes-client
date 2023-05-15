@@ -84,3 +84,4 @@ export default class HeroService {
     });
   }
 }
+// { headers: { 'Authorization': 'Bearer <my-jwt-token>' } }
