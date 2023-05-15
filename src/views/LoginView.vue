@@ -28,18 +28,5 @@ export default {
 </script>
 
 <style>
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-input {
-  width: 300px;
-  height: 30px;
-  margin: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  padding: 5px;
-}
 </style>

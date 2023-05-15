@@ -95,7 +95,7 @@ export default {
 
 header {
   height: 5rem;
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 nav ul {

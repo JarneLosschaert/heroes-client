@@ -10,7 +10,7 @@
         </div>
         <div class="field">
             <label :for="powerLevel">Power Level (/100):</label>
-            <input type="number" :name="powerLevel" :id="powerLevel" :placeholder="powerLevel" v-model="hero.powerLevel" required>
+            <input type="number" :name="powerLevel" :id="powerLevel" :placeholder="powerLevel" v-model="hero.powerLevel" min="0" max="100" required>
         </div>
         <div class="field">
             <label :for="birthday">Birthday:</label>

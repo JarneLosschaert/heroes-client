@@ -56,4 +56,31 @@ export default class HeroService {
       }),
     })
   }
+
+  async update(hero) {
+    console.log(hero["power-level"]);
+    const fullUrl = url + "/" + hero.id;
+    console.log(fullUrl);
+    fetch(fullUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "name": hero.name,
+        "description": hero.translations.description,
+        "power-level": hero["power-level"],
+        "birthday": hero.birthday,
+        "race": hero.translations.race,
+        "image":hero.image,
+      })
+    });
+  }
+
+  async delete(heroId) {
+    const fullUrl = url + "/" + heroId;
+    fetch(fullUrl, {
+      method: "DELETE"
+    });
+  }
 }
