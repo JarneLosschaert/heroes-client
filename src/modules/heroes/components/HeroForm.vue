@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="createHero()">
+    <form v-if="isToken" @submit.prevent="createHero()">
         <div class="field">
             <label :for="name">Name:</label>
             <input :name="name" :id="name" :placeholder="name" v-model="hero.name" required>
@@ -26,6 +26,7 @@
         </div>
         <button type="submit">Create Hero</button>
     </form>
+    <p v-else>You need to be logged in to create a hero</p>
 </template>
 
 
@@ -53,6 +54,11 @@ export default {
             .then((response) => {
                 this.$router.push({path: '/'});
             })
+        }
+    },
+    computed: {
+        isToken() {
+            return localStorage.getItem("token") !== null;
         }
     }
 }

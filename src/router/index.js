@@ -27,6 +27,11 @@ const router = createRouter({
       path: '/create-hero',
       name: 'create-hero',
       component: () => import('../views/CreateHeroView.vue')
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('../views/ProfileView.vue')
     }
    ,
   ]

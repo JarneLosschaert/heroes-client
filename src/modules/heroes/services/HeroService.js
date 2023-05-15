@@ -18,6 +18,10 @@ export default class HeroService {
     return language;
   }
 
+  getToken() {
+    return localStorage.getItem("token");
+  }
+
   async all() {
     let fullUrl = url;
     fullUrl += "/list";
@@ -45,6 +49,7 @@ export default class HeroService {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + this.getToken()
       },
       body: JSON.stringify({
         "name": hero.name,
@@ -84,4 +89,3 @@ export default class HeroService {
     });
   }
 }
-// { headers: { 'Authorization': 'Bearer <my-jwt-token>' } }

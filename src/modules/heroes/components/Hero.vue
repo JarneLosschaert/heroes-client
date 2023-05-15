@@ -41,15 +41,15 @@ export default {
         background-color: var(--color-primary-variant);
     }
     .hero img {
-        height: 50%;
+        height: 80%;
         width: 100%;
-        object-fit: cover;
+        object-fit: crop;
         border-radius: 0.5rem 0.5rem 0 0;
         background: #5A5A5A;
         text-align: center;
     }
     .hero div {
-        height: 50%;
+        height: 20%;
         display: flex;
         flex-direction: column;
         margin: 0.5rem;

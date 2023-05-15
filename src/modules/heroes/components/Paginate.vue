@@ -44,12 +44,11 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
     color: var(--color-text-accent);
-    bottom: 3rem;
-    left: 43%;
-    width: 14%;
+    width: 18vw;
     font-weight: bold;
+    margin: 3rem auto;
+    text-align: center;
 }
 
 .arrow {

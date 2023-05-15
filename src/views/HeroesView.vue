@@ -38,8 +38,5 @@ export default {
 </script>
 
 <style>
-body {
-    margin-bottom: 7rem;
-}
 
 </style>

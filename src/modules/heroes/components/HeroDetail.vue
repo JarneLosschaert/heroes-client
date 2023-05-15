@@ -38,7 +38,10 @@ export default {
   },
   methods: {
     deleteHero() {
-      this.service.delete(this.hero.id);
+      this.service.delete(this.hero.id)
+      .then((response) => {
+        this.$router.push({path: '/'});
+      })
     },
     editPowerLevel() {
       this.powerLevel = this.getPowerLevel();
@@ -74,7 +77,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 70vh;
+  height: 75vh;
 }
 .hero-detail-image {
   height: 100%;
@@ -83,7 +86,7 @@ export default {
 .hero-detail-image img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: crop;
   border-radius: 1rem;
 }
 .hero-detail-content {

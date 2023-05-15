@@ -35,7 +35,7 @@ import { RouterLink, RouterView } from "vue-router";
               </div>
             </li>
             <li>
-              <RouterLink id="profile" to="/login">
+              <RouterLink id="profile" to="/profile">
                 <img src="./assets/images/profile.png" alt="profile" />
               </RouterLink>
             </li>

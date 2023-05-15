@@ -28,10 +28,12 @@ export default class UserService {
             credentials: 'include'
         }).then(response => response.json())
             .then(data => {
-                console.log(data);
-                console.log(document.cookie);
-            }
-            )
+                console.log('Success:', data);
+                if (data.authorisation.token) {
+                    localStorage.setItem("token", data.authorisation.token);
+                    localStorage.setItem("userName", data.userName);
+                }
+            })
             .catch((error) => {
                 console.error('Error:', error);
             })
