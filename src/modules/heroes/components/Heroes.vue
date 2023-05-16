@@ -56,7 +56,7 @@ export default {
       this.heroes = await this.service
         .setPage(this.page)
         .all();
-      this.heroes = this.heroes;
+      this.heroes = this.heroes.data;
       this.setPages(this.heroes.last_page);
       this.loaded = true;
     }

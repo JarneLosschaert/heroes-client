@@ -66,5 +66,10 @@ export default {
 </script>
 
 <style>
-    
+    p {
+        font-size: 1.5rem;
+        margin: 13rem;
+        font-weight: bold;
+        text-align: center;
+    }
 </style>
