@@ -1,13 +1,14 @@
 <template>
-    <div v-if="isToken">
+  <div class="profile">
+    <div class="loggedIn" v-if="isToken">
         <p>You are logged in as {{ user() }}</p>
         <button @click="logout()">Logout</button>
     </div>
-    <div v-else>
+    <div class="buttons" v-else>
         <RouterLink to="/login"><button>Login</button></RouterLink>
         <RouterLink to="/register"><button>Register</button></RouterLink>
     </div>
-    
+  </div>
 </template>
 
 <script>
@@ -37,4 +38,44 @@ export default {
 </script>
 
 <style>
+
+.profile .buttons {
+    margin: 8rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.profile button{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 5px;
+    background-color: var(--color-primary);
+    color: white; 
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover{
+  background-color: var(--color-primary-dark);
+}
+
+.loggedIn {
+  margin: 8rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.loggedIn p{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
 </style>

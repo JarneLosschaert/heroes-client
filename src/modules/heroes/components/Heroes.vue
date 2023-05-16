@@ -1,6 +1,7 @@
 <template>
   <section id="heroes">
     <h2>Your heroes</h2>
+    <Filter @filter="filterHeroes"></Filter>
     <div class="wrapper">
       <div class="loader" v-show="!loaded"></div>
       <hero
@@ -16,11 +17,13 @@
 <script>
 import HeroService from "../services/HeroService";
 import Hero from "../components/Hero.vue";
+import Filter from "../components/Filter.vue";
 
 export default {
   name: "Heroes",
   components: {
     Hero,
+    Filter,
   },
   props: {
     page: {
