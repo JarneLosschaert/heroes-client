@@ -22,13 +22,34 @@ export default class HeroService {
     return localStorage.getItem("token");
   }
 
-  async all() {
+  async all(filter) {
     let fullUrl = url;
     fullUrl += "/list";
     fullUrl += "?page=" + this.page;
     fullUrl += "&language=" + this.getLanguage();
 
+    fullUrl += "&name=" + filter.name;
+    fullUrl += "&minPowerLevel=" + filter.minPowerLevel;
+    fullUrl += "&maxPowerLevel=" + filter.maxPowerLevel;
+
     const response = await fetch(fullUrl);
+    const data = await response.json();
+
+    return data;
+  }
+
+  async favorites() {
+    let fullUrl = url;
+    fullUrl += "/favorites";
+    fullUrl += "?page=" + this.page;
+
+    const config = {
+      headers: {
+        Authorization: "Bearer " + this.getToken(),
+      },
+    };
+
+    const response = await fetch(fullUrl, config);
     const data = await response.json();
 
     return data;
@@ -37,7 +58,7 @@ export default class HeroService {
   async find(id) {
     let fullUrl = url + "/" + id;
     fullUrl += "?language=" + this.getLanguage();
-    console.log(fullUrl);
+
     const response = await fetch(fullUrl);
     const data = await response.json();
 
@@ -49,17 +70,19 @@ export default class HeroService {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'Bearer ' + this.getToken()
+        Authorization: "Bearer " + this.getToken(),
       },
       body: JSON.stringify({
-        "name": hero.name,
-        "description": hero.description,
+        name: hero.name,
+        description: hero.description,
         "power-level": hero.powerLevel,
-        "birthday": hero.birthday,
-        "race": hero.race,
-        "image":hero.image,
+        birthday: hero.birthday,
+        race: hero.race,
+        image: hero.image,
       }),
-    })
+    }).catch((error) => {
+      console.error("Error:", error);
+    });
   }
 
   async update(hero) {
@@ -72,20 +95,24 @@ export default class HeroService {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "name": hero.name,
-        "description": hero.translations.description,
+        name: hero.name,
+        description: hero.translations.description,
         "power-level": hero["power-level"],
-        "birthday": hero.birthday,
-        "race": hero.translations.race,
-        "image":hero.image,
-      })
+        birthday: hero.birthday,
+        race: hero.translations.race,
+        image: hero.image,
+      }),
+    }).catch((error) => {
+      console.error("Error:", error);
     });
   }
 
   async delete(heroId) {
     const fullUrl = url + "/" + heroId;
     fetch(fullUrl, {
-      method: "DELETE"
+      method: "DELETE",
+    }).catch((error) => {
+      console.error("Error:", error);
     });
   }
 }

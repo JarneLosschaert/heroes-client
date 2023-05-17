@@ -1,7 +1,5 @@
 <template>
   <section id="heroes">
-    <h2>Your heroes</h2>
-    <Filter @filter="filterHeroes"></Filter>
     <div class="wrapper">
       <div class="loader" v-show="!loaded"></div>
       <hero
@@ -9,6 +7,8 @@
         v-for="hero in heroes.data"
         :key="hero.id"
         :hero="hero"
+        :favorites="favorites"
+        :isFavorite="isFavorite(hero)"
       ></hero>
     </div>
   </section>
@@ -17,21 +17,32 @@
 <script>
 import HeroService from "../services/HeroService";
 import Hero from "../components/Hero.vue";
-import Filter from "../components/Filter.vue";
 
 export default {
   name: "Heroes",
   components: {
     Hero,
-    Filter,
   },
   props: {
     page: {
       default: 1,
     },
+    filter: {
+      type: Object,
+      default: () => {
+        return {
+          name: "",
+          minPowerLevel: 0,
+          maxPowerLevel: 100,
+        };
+      },
+    },
     setPages: {
       type: Function,
-      required: true
+    },
+    favorites: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -39,6 +50,7 @@ export default {
       service: new HeroService(),
       heroes: [],
       loaded: false,
+      favoritesArray: []
     };
   },
   watch: {
@@ -50,20 +62,45 @@ export default {
       },
       immediate: true,
     },
+    filter: {
+      handler: async function () {
+        if (!this.loaded) return;
+        this.loaded = false;
+        await this.loadHeroes();
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   async mounted() {
     await this.loadHeroes();
   },
   methods: {
     async loadHeroes() {
-      this.heroes = await this.service
-        .setPage(this.page)
-        .all();
-      this.heroes = this.heroes.data;
-      this.setPages(this.heroes.last_page);
+      if (this.favorites) {
+        this.heroes = await this.service.favorites(this.page);
+      } else {
+        this.heroes = await this.service.setPage(this.page).all(this.filter);
+        this.heroes = this.heroes.data;
+        this.setPages(this.heroes.last_page);
+      }
+      if (this.isToken()) {
+          this.favoritesArray = await this.service.favorites();
+          this.favoritesArray = this.favoritesArray.data;
+      }
       this.loaded = true;
-    }
-  },
+    },
+    isToken() {
+      return localStorage.getItem("token");
+    },
+    isFavorite(hero) {
+      if (this.favoritesArray) {
+        return this.favoritesArray.find((favorite) => {
+          return favorite.id === hero.id;
+        });
+      }
+    },
+  }
 };
 </script>
 

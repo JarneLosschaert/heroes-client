@@ -10,24 +10,33 @@
       <p v-if="hero && !editing"><em>Power level: </em>{{ getPowerLevel() }}</p>
       <p v-if="hero && editing"><em>Power level: </em><input type="number" :placeholder="getPowerLevel()" v-model="powerLevel" min="0" max="100"></p>
       <p v-if="hero.translations">{{ this.hero.translations.description }}</p>
-      <button v-if="!editing" @click="editPowerLevel()"><p>Update power level</p></button>
-      <button v-if="editing" @click="savePowerLevel()"><p>Save power level</p></button>
-      <button @click="deleteHero()"><p>Delete hero</p></button>
+      <div v-if="isToken">
+        <button v-if="!favorite" @click="addFavorite()"><p>Add to your favorites</p></button>
+        <button v-if="favorite" @click="removeFavorite()"><p>Remove from your favorites</p></button>
+        <button v-if="!editing" @click="editPowerLevel()"><p>Update power level</p></button>
+        <button v-if="editing" @click="savePowerLevel()"><p>Save power level</p></button>
+        <button @click="deleteHero()"><p>Delete hero</p></button>
+      </div>
+      
     </div>
   </article>
 </template>
 
 <script>
 import HeroService from '../services/HeroService';
+import UserService from '../../users/services/UserService';
 
 export default {
   name: "Hero",
   data() {
     return {
-      service: new HeroService(),
+      heroService: new HeroService(),
+      userService: new UserService  (),
       hadTranslations: false,
       editing: false,
       powerLevel: 0,
+      favorite: false,
+      favoritesArray: [],
     };
   },
   props: {
@@ -36,9 +45,17 @@ export default {
       required: true,
     },
   },
+  async mounted() {
+    this.favoritesArray = await this.heroService.favorites();
+    this.favoritesArray = this.favoritesArray.data;
+    this.favoritesArray = this.favoritesArray.map((favorite) => {
+      return favorite.id;
+    });
+    this.favorite = this.favoritesArray.includes(this.hero.id);
+  },
   methods: {
     deleteHero() {
-      this.service.delete(this.hero.id)
+      this.heroService.delete(this.hero.id)
       .then((response) => {
         this.$router.push({path: '/'});
       })
@@ -50,7 +67,7 @@ export default {
     savePowerLevel() {
       this.editing = false;
       this.hero["power-level"] = this.powerLevel;
-      this.service.update(this.hero);
+      this.heroService.update(this.hero);
     },
     age() {
       const today = new Date();
@@ -67,7 +84,22 @@ export default {
         return this.hero["power-level"];
       }
       return this.hero.powerLevel;
-    }
+    },
+    isToken() {
+      return localStorage.getItem("token");
+    },
+    addFavorite() {
+      this.favoritesArray.push(this.hero.id);
+      this.userService.update(this.favoritesArray);
+      this.favorite = true;
+    },
+    removeFavorite() {
+      this.favoritesArray = this.favoritesArray.filter((favorite) => {
+        return favorite.id !== this.hero.id;
+      });
+      this.userService.update(this.favoritesArray);
+      this.favorite = false;
+    },
   }
 };
 </script>
@@ -130,4 +162,9 @@ export default {
   border-radius: 0.2rem;
 }
 
+.hero-detail-content div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 </style>

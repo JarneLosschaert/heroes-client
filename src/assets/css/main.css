@@ -1,5 +1,5 @@
-@import './base.css';
 @import './reset.css';
+@import './base.css';
 
 
 body{
@@ -39,19 +39,57 @@ h2 {
 
 /* form */
 
-form {
+/* form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 2rem 0;
-}
+} */
 
 input {
-  width: 300px;
-  height: 30px;
-  margin: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  padding: 5px;
+  height: 2rem; 
+  border-radius: 0.3rem;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+button {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: var(--color-secondary);
+}
+
+.general-form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.general-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.general-form button {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.announcement {
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
 }

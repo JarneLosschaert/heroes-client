@@ -18,7 +18,7 @@ import { RouterLink, RouterView } from "vue-router";
                 v-bind:class="{ accent: isCurrentRoute('/') }"
                 to="/"
               >
-                Your Heroes
+                All Heroes
               </RouterLink>
             </li>
             <li>
@@ -27,6 +27,14 @@ import { RouterLink, RouterView } from "vue-router";
                 to="/create-hero"
               >
                 Create Hero
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                v-bind:class="{ accent: isCurrentRoute('/favorites') }"
+                to="/favorites"
+              >
+                Favorites
               </RouterLink>
             </li>
             <li>
@@ -104,7 +112,7 @@ nav ul {
   align-items: center;
 }
 
-nav ul ul {
+nav ul ul, nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,8 +1,8 @@
 <template>
-<form class="form">
+<form class="filter" @submit.prevent="onFilter(this.filter)">
     <div class="field">
-        <label :for="heroName">Hero name</label>
-        <input type="text" :name="heroName" :id="heroName" placeholder="Hero name" v-model="filter.heroName">
+        <label :for="heroName">Hero name:</label>
+        <input type="text" :name="name" :id="name" placeholder="Hero name" v-model="filter.name">
     </div>
     <div class="field">
         <label :for="minPwereLvel">Minimum power level:</label>
@@ -12,25 +12,27 @@
         <label :for="maxPwereLvel">Maximum power level:</label>
         <input type="number" :name="maxPowerLevel" :id="maxPowerLevel" placeholder="Maximum power level" v-model="filter.maxPowerLevel">
     </div>
-    <button type="submit">search</button>
+    <button type="submit">Search</button>
 </form>
+<hr>
 </template>
 
 <script>
 export default {
     name: 'Filter',
+    props: {
+        onFilter: {
+            type: Function,
+            required: true
+        }
+    },
     data() {
         return {
             filter: {
-                heroName: '',
+                name: '',
                 minPowerLevel: 0,
                 maxPowerLevel: 100,
             }
-        }
-    },
-    methods: {
-        filterHeroes() {
-            this.$emit('filter', this.filter);
         }
     }
 }
@@ -38,29 +40,29 @@ export default {
 
 <style>
 
-.form {
+.filter {
     display: flex;
-    align-items: center;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.form button{
-    width: 50%;
-    height: 2.5rem;
-    border-radius: 5px;
-    background-color: var(--color-primary);
-    color: var(--color-text); 
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
+.filter div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter div, .filter button {
+    width: 15vw;
+}
+
+.filter button{
+    height: 50%;
     margin-top: auto;
-    margin-bottom: 0.63rem;
 }
 
-button:hover{
-  background-color: var(--color-primary-dark);
+hr {
+    margin: 1rem 0;
+    color: var(--color-text);
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <form v-if="isToken" @submit.prevent="createHero()">
+    <form v-if="isToken" class="general-form" @submit.prevent="createHero()">
         <div class="field">
             <label :for="name">Name:</label>
             <input :name="name" :id="name" placeholder="Name" v-model="hero.name" required>
@@ -9,7 +9,7 @@
             <input :name="description" :id="description" placeholder="Description" v-model="hero.description" required>
         </div>
         <div class="field">
-            <label :for="powerLevel">Power Level (/100):</label>
+            <label :for="powerLevel">Power Level /100:</label>
             <input type="number" :name="powerLevel" :id="powerLevel" v-model="hero.powerLevel" min="0" max="100" required>
         </div>
         <div class="field">
@@ -21,12 +21,12 @@
             <input :name="race" :id="race" placeholder="Race" v-model="hero.race" required>
         </div>
         <div class="field">
-            <label :for="image">Image:</label>
+            <label :for="image">Image url:</label>
             <input :name="image" :id="image" placeholder="Image" v-model="hero.image" required>
         </div>
         <button type="submit">Create Hero</button>
     </form>
-    <p v-else>You need to be logged in to create a hero</p>
+    <p class="announcement" v-else>You need to be logged in to create a hero</p>
 </template>
 
 
@@ -67,19 +67,4 @@ export default {
 
 <style>
 
-.field {
-  display: flex;
-  flex-direction: column;
-}
-
-button {
-    width: 10rem;
-}
-
-    p {
-        font-size: 1.5rem;
-        margin: 13rem;
-        font-weight: bold;
-        text-align: center;
-    }
 </style>

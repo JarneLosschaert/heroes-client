@@ -1,10 +1,10 @@
 <template>
   <div class="profile">
-    <div class="loggedIn" v-if="isToken">
-        <p>You are logged in as {{ user() }}</p>
+    <div v-if="isToken">
+        <p class="announcement">You are logged in as {{ user() }}</p>
         <button @click="logout()">Logout</button>
     </div>
-    <div class="buttons" v-else>
+    <div v-else>
         <RouterLink to="/login"><button>Login</button></RouterLink>
         <RouterLink to="/register"><button>Register</button></RouterLink>
     </div>
@@ -26,7 +26,7 @@ export default {
     logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("userName");
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/login" });
     },
   },
   computed: {
@@ -39,43 +39,17 @@ export default {
 
 <style>
 
-.profile .buttons {
-    margin: 8rem;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.profile button{
-    width: 10rem;
-    height: 3rem;
-    border-radius: 5px;
-    background-color: var(--color-primary);
-    color: white; 
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover{
-  background-color: var(--color-primary-dark);
-}
-
-.loggedIn {
-  margin: 8rem;
+.profile div {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
+  align-items: center;
+  gap: 1rem;
+  width: 30%;
+  margin: auto;
 }
 
-.loggedIn p{
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--color-text);
+.profile div button, .profile div a {
+  width: 100%;
 }
 
 </style>
