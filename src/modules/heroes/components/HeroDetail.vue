@@ -95,7 +95,7 @@ export default {
     },
     removeFavorite() {
       this.favoritesArray = this.favoritesArray.filter((favorite) => {
-        return favorite.id !== this.hero.id;
+        return favorite !== this.hero.id;
       });
       this.userService.update(this.favoritesArray);
       this.favorite = false;
