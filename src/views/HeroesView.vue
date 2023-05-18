@@ -1,7 +1,7 @@
 <template>
   <h2>All heroes</h2>
   <Filter :filter="filter" :onFilter="onFilter"></Filter>
-  <heroes :page="page" :setPages="setPages" :filter="filter" :key="filter"></heroes>
+  <heroes :page="page" :setPages="setPages" :filter="filter"></heroes>
   <paginate :page="page" :pages="pages" :setPage="setPage"></paginate>
 </template>
 
@@ -43,11 +43,11 @@ export default {
       this.pages = pages;
     },
     onFilter(filter) {
-      this.filter = filter;
+      const newFilter = filter;
+      console.log(newFilter);
+      this.filter = newFilter;
       this.page = 1;
     },
   },
 };
 </script>
-
-<style></style>

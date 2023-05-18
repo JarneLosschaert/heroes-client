@@ -13,11 +13,6 @@
   --color-primary-variant: var(--darkred);
   --color-secondary: var(--blue);
 
-  --color-border: var(--color-onprimary);
-  --color-border-hover: var(---color-primary);
-
-  --color-button: var(--color-primary);
-
   --color-heading: var(--color-primary);
   --color-text: var(--color-onprimary);
   --color-text-accent: var(--color-primary);
@@ -32,8 +27,3 @@
   font-size: 1rem;
   text-decoration: none;
 }
-
-.accent {
-  color: var(--color-text-accent);
-}
-

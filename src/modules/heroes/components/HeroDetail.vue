@@ -31,11 +31,11 @@ export default {
   data() {
     return {
       heroService: new HeroService(),
-      userService: new UserService  (),
+      userService: new UserService(),
       hadTranslations: false,
       editing: false,
       powerLevel: 0,
-      favorite: false,
+      favorite: null,
       favoritesArray: [],
     };
   },

@@ -134,7 +134,7 @@ nav ul ul, nav a {
 #language {
   cursor: pointer;
   padding: 0.4rem 0.5rem;
-  background-color: var(--color-button);
+  background-color: var(--color-primary);
   border-radius: 0.25rem;
 }
 </style>

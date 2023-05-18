@@ -1,16 +1,16 @@
 <template>
-<form class="filter" @submit.prevent="onFilter(this.filter)">
+<form class="filter" @submit.prevent="onFilter(filter)">
     <div class="field">
-        <label :for="heroName">Hero name:</label>
+        <label :for="name">Hero name:</label>
         <input type="text" :name="name" :id="name" placeholder="Hero name" v-model="filter.name">
     </div>
     <div class="field">
-        <label :for="minPwereLvel">Minimum power level:</label>
-        <input type="number" :name="minPowerLevel" :id="minPowerLevel" placeholder="Minimum power level" v-model="filter.minPowerLevel">
+        <label :for="minPowerLevel">Minimum power level:</label>
+        <input type="number" :name="minPowerLevel" :id="minPowerLevel" placeholder="Minimum power level" v-model="this.filter.minPowerLevel" min="0" max="100">
     </div>
     <div class="field">
-        <label :for="maxPwereLvel">Maximum power level:</label>
-        <input type="number" :name="maxPowerLevel" :id="maxPowerLevel" placeholder="Maximum power level" v-model="filter.maxPowerLevel">
+        <label :for="maxPowerLevel">Maximum power level:</label>
+        <input type="number" :name="maxPowerLevel" :id="maxPowerLevel" placeholder="Maximum power level" v-model="filter.maxPowerLevel" min="0" max="100">
     </div>
     <button type="submit">Search</button>
 </form>
@@ -39,7 +39,6 @@ export default {
 </script>
 
 <style>
-
 .filter {
     display: flex;
     flex-direction: row;

@@ -81,7 +81,7 @@ export default class HeroService {
         image: hero.image,
       }),
     }).catch((error) => {
-      console.error("Error:", error);
+      console.error(error);
     });
   }
 
@@ -103,7 +103,7 @@ export default class HeroService {
         image: hero.image,
       }),
     }).catch((error) => {
-      console.error("Error:", error);
+      console.error(error);
     });
   }
 
@@ -112,7 +112,7 @@ export default class HeroService {
     fetch(fullUrl, {
       method: "DELETE",
     }).catch((error) => {
-      console.error("Error:", error);
+      console.error(error);
     });
   }
 }

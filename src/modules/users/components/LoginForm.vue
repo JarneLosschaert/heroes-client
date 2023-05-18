@@ -20,7 +20,7 @@
         required
       />
     </div>
-
+    <p v-if="error" class="error">Wrong e-mail or password. Please try again.</p>
     <button type="submit">Login</button>
     <button @click="routeRegister">Make an account</button>
   </form>
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       service: new UserService(),
+      error: false,
       user: {
         email: "",
         password: "",
@@ -42,10 +43,19 @@ export default {
   },
   methods: {
     async login() {
-      await this.service.login(this.user).catch((error) => {
-        console.log(error);
-      });
-      this.$router.push({ path: "/profile" });
+      await this.service
+        .login(this.user, this.succeededLogin, this.failedLogin)
+    },
+    succeededLogin(data) {
+      if (data.authorisation.token) {
+        localStorage.setItem("token", data.authorisation.token);
+        localStorage.setItem("userName", data.userName);
+        this.$router.push({ path: "/profile" });
+      }
+    },
+    failedLogin(error) {
+      this.error = true;
+      console.error("Error:", error);
     },
     routeRegister() {
       this.$router.push({ path: "/register" });
@@ -53,5 +63,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

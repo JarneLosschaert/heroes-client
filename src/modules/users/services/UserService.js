@@ -5,7 +5,7 @@ export default class UserService {
     return localStorage.getItem("token");
   }
 
-  async register(user) {
+  async register(user, success, failed) {
     fetch(url + "/register", {
       method: "POST",
       headers: {
@@ -16,10 +16,16 @@ export default class UserService {
         email: user.email,
         password: user.password,
       }),
-    });
+    })
+      .then((data) => {
+        success(data);
+      })
+      .catch((error) => {
+        failed(error);
+      });
   }
 
-  async login(user) {
+  async login(user, success, failed) {
     fetch(url + "/login", {
       method: "POST",
       headers: {
@@ -33,13 +39,10 @@ export default class UserService {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.authorisation.token) {
-          localStorage.setItem("token", data.authorisation.token);
-          localStorage.setItem("userName", data.userName);
-        }
+        success(data);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        failed(error);
       });
   }
 
@@ -50,19 +53,17 @@ export default class UserService {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + this.getToken(),
+        Authorization: "Bearer " + this.getToken(),
       },
       body: JSON.stringify({
-        "favoriteHeroes": favorites
+        favoriteHeroes: favorites,
+      }),
+    })
+      .then((data) => {
+        console.log(data);
       })
-    }).then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            }
-        )
-        .catch((error) => {
-            console.error("Error:", error);
-            
-    });
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

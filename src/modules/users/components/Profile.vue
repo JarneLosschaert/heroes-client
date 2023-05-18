@@ -38,7 +38,6 @@ export default {
 </script>
 
 <style>
-
 .profile div {
   display: flex;
   flex-direction: column;
@@ -51,5 +50,4 @@ export default {
 .profile div button, .profile div a {
   width: 100%;
 }
-
 </style>
