@@ -1,5 +1,5 @@
 <template>
-  <h2>Create hero</h2>
+  <h2>Create Your Hero</h2>
   <HeroForm></HeroForm>
 </template>
 

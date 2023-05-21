@@ -1,6 +1,6 @@
 <template>
-  <h2>All heroes</h2>
-  <Filter :filter="filter" :onFilter="onFilter"></Filter>
+  <h2>All Heroes</h2>
+  <Filter @onFilter="onFilter"></Filter>
   <heroes :page="page" :setPages="setPages" :filter="filter"></heroes>
   <paginate :page="page" :pages="pages" :setPage="setPage"></paginate>
 </template>
@@ -42,10 +42,10 @@ export default {
     setPages(pages) {
       this.pages = pages;
     },
-    onFilter(filter) {
-      const newFilter = filter;
-      console.log(newFilter);
-      this.filter = newFilter;
+    onFilter(newFilter) {
+      this.filter.maxPowerLevel = newFilter.maxPowerLevel;
+      this.filter.minPowerLevel = newFilter.minPowerLevel;
+      this.filter.name = newFilter.name;
       this.page = 1;
     },
   },

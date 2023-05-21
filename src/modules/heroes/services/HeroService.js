@@ -86,9 +86,7 @@ export default class HeroService {
   }
 
   async update(hero) {
-    console.log(hero["power-level"]);
     const fullUrl = url + "/" + hero.id;
-    console.log(fullUrl);
     fetch(fullUrl, {
       method: "PUT",
       headers: {

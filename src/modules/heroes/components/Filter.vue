@@ -1,12 +1,12 @@
 <template>
-<form class="filter" @submit.prevent="onFilter(filter)">
+<form class="filter" @submit.prevent="onFilter(this.filter)">
     <div class="field">
         <label :for="name">Hero name:</label>
         <input type="text" :name="name" :id="name" placeholder="Hero name" v-model="filter.name">
     </div>
     <div class="field">
         <label :for="minPowerLevel">Minimum power level:</label>
-        <input type="number" :name="minPowerLevel" :id="minPowerLevel" placeholder="Minimum power level" v-model="this.filter.minPowerLevel" min="0" max="100">
+        <input type="number" :name="minPowerLevel" :id="minPowerLevel" placeholder="Minimum power level" v-model="filter.minPowerLevel" min="0" max="100">
     </div>
     <div class="field">
         <label :for="maxPowerLevel">Maximum power level:</label>
@@ -20,12 +20,6 @@
 <script>
 export default {
     name: 'Filter',
-    props: {
-        onFilter: {
-            type: Function,
-            required: true
-        }
-    },
     data() {
         return {
             filter: {
@@ -33,6 +27,11 @@ export default {
                 minPowerLevel: 0,
                 maxPowerLevel: 100,
             }
+        }
+    },
+    methods: {
+        onFilter(filter) {
+            this.$emit('onFilter', filter);
         }
     }
 }

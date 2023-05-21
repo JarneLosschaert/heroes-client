@@ -47,7 +47,6 @@ export default class UserService {
   }
 
   async update(favorites) {
-    console.log(favorites);
     const fullUrl = url + "/user";
     fetch(fullUrl, {
       method: "PATCH",
@@ -59,9 +58,6 @@ export default class UserService {
         favoriteHeroes: favorites,
       }),
     })
-      .then((data) => {
-        console.log(data);
-      })
       .catch((error) => {
         console.log(error);
       });
