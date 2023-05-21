@@ -10,14 +10,13 @@
       <p v-if="hero && !editing"><em>Power level: </em>{{ getPowerLevel() }}</p>
       <p v-if="hero && editing"><em>Power level: </em><input type="number" :placeholder="getPowerLevel()" v-model="powerLevel" min="0" max="100"></p>
       <p v-if="hero.translations">{{ this.hero.translations.description }}</p>
-      <div v-if="isToken">
+      <div v-if="isToken()">
         <button v-if="!favorite" @click="addFavorite()"><p>Add to your favorites</p></button>
         <button v-if="favorite" @click="removeFavorite()"><p>Remove from your favorites</p></button>
         <button v-if="!editing" @click="editPowerLevel()"><p>Update power level</p></button>
         <button v-if="editing" @click="savePowerLevel()"><p>Save power level</p></button>
         <button @click="deleteHero()"><p>Delete hero</p></button>
       </div>
-      
     </div>
   </article>
 </template>
